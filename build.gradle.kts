@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 val kotlinVersion = "1.4.0"
 val serializationVersion = "1.0.0-RC"
@@ -51,6 +52,8 @@ kotlin {
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("ch.qos.logback:logback-classic:1.2.3")
                 implementation("io.ktor:ktor-websockets:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-client-cio:$ktorVersion")
                 implementation("org.litote.kmongo:kmongo-coroutine-serialization:4.1.1")
             }
         }

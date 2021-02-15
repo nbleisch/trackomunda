@@ -8,21 +8,35 @@ import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.litote.kmongo.*
-import org.litote.kmongo.coroutine.*
-import com.mongodb.ConnectionString
-import org.litote.kmongo.reactivestreams.KMongo
+import io.ktor.client.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.request.*
+import io.ktor.http.HttpStatusCode.Companion.BadRequest
+import io.ktor.http.HttpStatusCode.Companion.InternalServerError
+import io.ktor.http.HttpStatusCode.Companion.OK
+import trackomunda.model.GangPayload
+import org.slf4j.LoggerFactory
+import trackomunda.model.Gang
+import trackomunda.model.YakTribeFetchURI
+import java.lang.IllegalArgumentException
+import java.net.URI
 
-val connectionString: ConnectionString? = System.getenv("MONGODB_URI")?.let {
-    ConnectionString("$it?retryWrites=false")
-}
-
-val client = if (connectionString != null) KMongo.createClient(connectionString).coroutine else KMongo.createClient().coroutine
-val database = client.getDatabase(connectionString?.database ?: "test")
-val collection = database.getCollection<ShoppingListItem>()
 
 fun main() {
     val port = System.getenv("PORT")?.toInt() ?: 9090
+
+    val log = LoggerFactory.getLogger("Server")
+
+    val httpClient = HttpClient() {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json{
+                ignoreUnknownKeys = true
+            })
+        }
+
+    }
+
     embeddedServer(Netty, port) {
         install(ContentNegotiation) {
             json()
@@ -47,18 +61,28 @@ fun main() {
             static("/") {
                 resources("")
             }
-            route(ShoppingListItem.path) {
+            route(GangPayload.path) {
                 get {
-                    call.respond(collection.find().toList())
+                   // call.respond(collection.find().toList())
                 }
                 post {
-                    collection.insertOne(call.receive<ShoppingListItem>())
-                    call.respond(HttpStatusCode.OK)
+                    val yakTribeGangToFetch = kotlin.runCatching {
+                        URI.create(call.receive<YakTribeFetchURI>().uri).let {
+                            val gang = httpClient.get<Gang>(it.toURL())
+                            call.respond(OK, gang)
+                        }
+                    }.recoverCatching { throwable ->
+                        when (throwable) {
+                            is IllegalArgumentException -> call.respond(BadRequest).also { log.info(throwable.message) }
+                            else -> call.respond(InternalServerError).also { log.info(throwable.message) }
+                        }
+                    }
+
                 }
                 delete("/{id}") {
                     val id = call.parameters["id"]?.toInt() ?: error("Invalid delete request")
-                    collection.deleteOne(ShoppingListItem::id eq id)
-                    call.respond(HttpStatusCode.OK)
+                    //collection.deleteOne(Gang::gang_id eq id)
+                    call.respond(OK)
                 }
             }
         }

@@ -5,6 +5,7 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 import kotlinx.browser.window
+import trackomunda.model.GangPayload
 
 val endpoint = window.location.origin // only needed until https://github.com/ktorio/ktor/issues/1695 is resolved
 
@@ -12,17 +13,17 @@ val jsonClient = HttpClient {
     install(JsonFeature) { serializer = KotlinxSerializer() }
 }
 
-suspend fun getShoppingList(): List<ShoppingListItem> {
-    return jsonClient.get(endpoint + ShoppingListItem.path)
+suspend fun getShoppingList(): List<GangPayload> {
+    return jsonClient.get(endpoint + GangPayload.path)
 }
 
-suspend fun addShoppingListItem(shoppingListItem: ShoppingListItem) {
-    jsonClient.post<Unit>(endpoint + ShoppingListItem.path) {
+suspend fun addShoppingListItem(gangPayload: GangPayload) {
+    jsonClient.post<Unit>(endpoint + GangPayload.path) {
         contentType(ContentType.Application.Json)
-        body = shoppingListItem
+        body = gangPayload
     }
 }
 
-suspend fun deleteShoppingListItem(shoppingListItem: ShoppingListItem) {
-    jsonClient.delete<Unit>(endpoint + ShoppingListItem.path + "/${shoppingListItem.id}")
+suspend fun deleteShoppingListItem(gangPayload: GangPayload) {
+    jsonClient.delete<Unit>(endpoint + GangPayload.path + "/${gangPayload.gang_id}")
 }

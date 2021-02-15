@@ -3,11 +3,12 @@ import react.dom.*
 import kotlinext.js.*
 import kotlinx.html.js.*
 import kotlinx.coroutines.*
+import trackomunda.model.GangPayload
 
 private val scope = MainScope()
 
 val App = functionalComponent<RProps> { _ ->
-    val (shoppingList, setShoppingList) = useState(emptyList<ShoppingListItem>())
+    val (shoppingList, setShoppingList) = useState(emptyList<GangPayload>())
 
     useEffect(dependencies = listOf()) {
         scope.launch {
@@ -19,7 +20,7 @@ val App = functionalComponent<RProps> { _ ->
         +"Full-Stack Shopping List"
     }
     ul {
-        shoppingList.sortedByDescending(ShoppingListItem::priority).forEach { item ->
+        shoppingList.sortedByDescending(GangPayload::alignment).forEach { item ->
             li {
                 key = item.toString()
                 attrs.onClickFunction = {
@@ -28,7 +29,7 @@ val App = functionalComponent<RProps> { _ ->
                         setShoppingList(getShoppingList())
                     }
                 }
-                +"[${item.priority}] ${item.desc} "
+                +"[${item.alignment}] ${item.alignment} "
             }
         }
     }
@@ -36,10 +37,10 @@ val App = functionalComponent<RProps> { _ ->
         InputComponent,
         props = jsObject {
             onSubmit = { input ->
-                val cartItem = ShoppingListItem(input.replace("!", ""), input.count { it == '!' })
+                //val cartItem = Gang(input.replace("!", ""), input.count { it == '!' })
                 scope.launch {
-                    addShoppingListItem(cartItem)
-                    setShoppingList(getShoppingList())
+                  //  addShoppingListItem(cartItem)
+                  //  setShoppingList(getShoppingList())
                 }
             }
         }
