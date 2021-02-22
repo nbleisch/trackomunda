@@ -1,6 +1,7 @@
 package trackomunda.components
 
 import clients.fetchGang
+import com.ccfraser.muirwik.components.spacingUnits
 import com.ccfraser.muirwik.components.table.*
 import react.RBuilder
 import react.RComponent
@@ -11,6 +12,9 @@ import react.dom.*
 import kotlinext.js.*
 import kotlinx.html.js.*
 import kotlinx.coroutines.*
+import kotlinx.css.*
+import styled.css
+import trackomunda.TestTransitions
 import trackomunda.model.GangPayload
 import trackomunda.model.Ganger
 
@@ -21,6 +25,11 @@ class GangerCard : RComponent<GangerProps, RState>() {
     override fun RBuilder.render() {
         h3 { +props.ganger.name }
         mTable {
+           css(css {
+                //padding(1.spacingUnits)
+               padding(0.spacingUnits)
+               //padding(LinearDimension.none)
+            })
             mTableHead {
                 mTableRow {
                     gangerAttributes.forEach {
