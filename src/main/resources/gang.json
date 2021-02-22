@@ -1,0 +1,567 @@
+{
+  "gang": {
+    "gang_id": "160881",
+    "gang_name": "The Way",
+    "gang_type": "Chaos Cult",
+    "gang_rating": "1145",
+    "campaign": "Fortune's Peak",
+    "url": "https://yaktribe.games/underhive/gang/the_way.160881/",
+    "credits": "45",
+    "meat": "0",
+    "reputation": "6",
+    "wealth": "1190",
+    "alignment": "Outlaw",
+    "allegiance": "Architect of Fate",
+    "territories": [],
+    "campaign_territories": [
+      "Settlement"
+    ],
+    "campaign_rackets": [
+      "Archaeotech Auctioning"
+    ],
+    "stash": [],
+    "gang_image": "https://yaktribe.games/community/media/img_20210204_111543214_3-jpg.56899/full",
+    "gang_notes": "",
+    "gangers": [
+      {
+        "ganger_id": "1089695",
+        "label_id": "",
+        "name": "Searg",
+        "type": "Disciple",
+        "m": 5,
+        "ws": 4,
+        "bs": 3,
+        "s": 3,
+        "t": 3,
+        "w": 2,
+        "i": 4,
+        "a": 1,
+        "ld": 7,
+        "cl": 6,
+        "wil": 8,
+        "int": 8,
+        "cost": "200",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Laspistol",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          },
+          {
+            "name": "Chainsword",
+            "qty": "1"
+          },
+          {
+            "name": "Incendiary Charge",
+            "qty": "1"
+          },
+          {
+            "name": "Chaos Familiar",
+            "qty": "2"
+          }
+        ],
+        "skills": [
+          "Nerves of Steel"
+        ],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:00:30",
+        "datetime_updated": "2021-02-21 11:19:41"
+      },
+      {
+        "ganger_id": "1089740",
+        "label_id": "",
+        "name": "Blaze",
+        "type": "Helot Cultist Specialist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "180",
+        "xp": "2",
+        "kills": "1",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Flamer",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          }
+        ],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:34:53",
+        "datetime_updated": "2021-02-21 11:19:36"
+      },
+      {
+        "ganger_id": "1090765",
+        "label_id": "M",
+        "name": "Fate",
+        "type": "Chaos Familiar",
+        "m": 5,
+        "ws": 4,
+        "bs": 0,
+        "s": 2,
+        "t": 2,
+        "w": 1,
+        "i": 2,
+        "a": 1,
+        "ld": 7,
+        "cl": 7,
+        "wil": 6,
+        "int": 7,
+        "cost": "0",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "Green Wing",
+        "datetime_added": "2021-01-15 1:50:42",
+        "datetime_updated": "2021-02-21 11:19:47"
+      },
+      {
+        "ganger_id": "1090763",
+        "label_id": "M",
+        "name": "Fortune",
+        "type": "Chaos Familiar",
+        "m": 5,
+        "ws": 4,
+        "bs": 0,
+        "s": 2,
+        "t": 2,
+        "w": 1,
+        "i": 2,
+        "a": 1,
+        "ld": 7,
+        "cl": 7,
+        "wil": 6,
+        "int": 7,
+        "cost": "0",
+        "xp": "4",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "Violet Wing",
+        "datetime_added": "2021-01-15 1:50:18",
+        "datetime_updated": "2021-02-21 11:20:01"
+      },
+      {
+        "ganger_id": "1090768",
+        "label_id": "S",
+        "name": "Destiny",
+        "type": "Chaos Familiar",
+        "m": 5,
+        "ws": 4,
+        "bs": 0,
+        "s": 2,
+        "t": 2,
+        "w": 1,
+        "i": 2,
+        "a": 1,
+        "ld": 7,
+        "cl": 7,
+        "wil": 6,
+        "int": 7,
+        "cost": "0",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "Red Wing",
+        "datetime_added": "2021-01-15 1:52:28",
+        "datetime_updated": "2021-02-21 11:20:29"
+      },
+      {
+        "ganger_id": "1090769",
+        "label_id": "S",
+        "name": "Doom",
+        "type": "Chaos Familiar",
+        "m": 5,
+        "ws": 4,
+        "bs": 0,
+        "s": 2,
+        "t": 2,
+        "w": 1,
+        "i": 2,
+        "a": 1,
+        "ld": 7,
+        "cl": 7,
+        "wil": 6,
+        "int": 7,
+        "cost": "0",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "Yellow Wing",
+        "datetime_added": "2021-01-15 1:52:57",
+        "datetime_updated": "2021-02-21 11:20:35"
+      },
+      {
+        "ganger_id": "1089698",
+        "label_id": "",
+        "name": "Zerk",
+        "type": "Helot Cultist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "80",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Sword",
+            "qty": "1"
+          },
+          {
+            "name": "Laspistol",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          }
+        ],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:02:23",
+        "datetime_updated": "2021-02-21 11:20:40"
+      },
+      {
+        "ganger_id": "1089700",
+        "label_id": "",
+        "name": "Crush",
+        "type": "Helot Cultist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "70",
+        "xp": "1",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Club",
+            "qty": "1"
+          },
+          {
+            "name": "Autopistol",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          }
+        ],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:04:17",
+        "datetime_updated": "2021-02-04 23:04:05"
+      },
+      {
+        "ganger_id": "1114819",
+        "label_id": "",
+        "name": "Volley",
+        "type": "Helot Cultist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "105",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Lasgun",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          },
+          {
+            "name": "Phosphor Canister",
+            "qty": "1"
+          }
+        ],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-02-05 11:36:45",
+        "datetime_updated": "2021-02-21 11:38:41"
+      },
+      {
+        "ganger_id": "1114835",
+        "label_id": "",
+        "name": "Mesh",
+        "type": "Helot Cultist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "65",
+        "xp": "0",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Lasgun",
+            "qty": "1"
+          },
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          }
+        ],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-02-05 11:52:56",
+        "datetime_updated": "2021-02-05 11:53:32"
+      },
+      {
+        "ganger_id": "1113691",
+        "label_id": "",
+        "name": "Magos Teknologis",
+        "type": "Heretek",
+        "m": 5,
+        "ws": 5,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 4,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 5,
+        "cost": "40",
+        "xp": "0",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          },
+          {
+            "name": "Grav-Gun",
+            "qty": "1"
+          }
+        ],
+        "skills": [
+          "Munitioneer"
+        ],
+        "injuries": [],
+        "image": null,
+        "status": "Alive",
+        "notes": "",
+        "datetime_added": "2021-02-04 9:57:29",
+        "datetime_updated": "2021-02-05 11:53:34"
+      },
+      {
+        "ganger_id": "1089693",
+        "label_id": "",
+        "name": "Master of Ceremonies",
+        "type": "Demagogue",
+        "m": 5,
+        "ws": 3,
+        "bs": 3,
+        "s": 3,
+        "t": 3,
+        "w": 2,
+        "i": 3,
+        "a": 2,
+        "ld": 6,
+        "cl": 5,
+        "wil": 6,
+        "int": 7,
+        "cost": "290",
+        "xp": "4",
+        "kills": "2",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Mesh Armor",
+            "qty": "1"
+          },
+          {
+            "name": "Reclaimed Autopistol",
+            "qty": "1"
+          },
+          {
+            "name": "Chaos Familiar",
+            "qty": "2"
+          },
+          {
+            "name": "Balefire Thrower",
+            "qty": "1"
+          }
+        ],
+        "skills": [
+          "Fearsome"
+        ],
+        "injuries": [
+          "Hand Injury"
+        ],
+        "image": null,
+        "status": "Recovery",
+        "notes": "",
+        "datetime_added": "2021-01-14 6:57:08",
+        "datetime_updated": "2021-02-21 11:21:04"
+      },
+      {
+        "ganger_id": "1089780",
+        "label_id": "",
+        "name": "Basteq Takar",
+        "type": "Disciple",
+        "m": 5,
+        "ws": 4,
+        "bs": 3,
+        "s": 3,
+        "t": 3,
+        "w": 2,
+        "i": 4,
+        "a": 1,
+        "ld": 7,
+        "cl": 6,
+        "wil": 8,
+        "int": 8,
+        "cost": "115",
+        "xp": "2",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [
+          {
+            "name": "Grenade Launcher w/Frag+Krak",
+            "qty": "1"
+          }
+        ],
+        "skills": [
+          "Overwatch"
+        ],
+        "injuries": [],
+        "image": null,
+        "status": "Recovery",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:59:49",
+        "datetime_updated": "2021-02-21 11:21:29"
+      },
+      {
+        "ganger_id": "1089709",
+        "label_id": "",
+        "name": "Furry",
+        "type": "Helot Cultist",
+        "m": 5,
+        "ws": 4,
+        "bs": 4,
+        "s": 3,
+        "t": 3,
+        "w": 1,
+        "i": 3,
+        "a": 1,
+        "ld": 9,
+        "cl": 7,
+        "wil": 7,
+        "int": 8,
+        "cost": "35",
+        "xp": "0",
+        "kills": "0",
+        "advance_count": "0",
+        "equipment": [],
+        "skills": [],
+        "injuries": [],
+        "image": null,
+        "status": "Dead",
+        "notes": "",
+        "datetime_added": "2021-01-14 7:09:41",
+        "datetime_updated": "2021-02-04 23:03:56"
+      }
+    ]
+  }
+}

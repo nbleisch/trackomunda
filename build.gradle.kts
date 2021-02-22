@@ -40,6 +40,10 @@ dependencies {
     implementation(npm("react-hot-loader", "^4.12.20"))
     implementation(devNpm("webpack-bundle-analyzer", "^3.8.0"))
 
+    //Http Client and Serialization
+    implementation("io.ktor:ktor-client-js:$ktorVersion")
+    implementation("io.ktor:ktor-client-json-js:$ktorVersion")
+    implementation("io.ktor:ktor-client-serialization-js:$ktorVersion")
 }
 
 
