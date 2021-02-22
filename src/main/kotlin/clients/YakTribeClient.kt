@@ -23,6 +23,6 @@ val jsonClient = HttpClient {
     }
 }
 
-suspend fun fetchGang(): Gang {
+suspend fun fetchGang(): Gang? {
     return jsonClient.get("$endpoint/gang.json")
 }

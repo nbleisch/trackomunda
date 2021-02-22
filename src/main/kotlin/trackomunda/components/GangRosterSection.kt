@@ -26,7 +26,7 @@ class GangRosterSection : RComponent<RProps, GangState>() {
         scope.launch {
             val newState = fetchGang()
             setState {
-                gangPayload = newState
+                gangPayload = newState?.gang
             }
         }
     }
