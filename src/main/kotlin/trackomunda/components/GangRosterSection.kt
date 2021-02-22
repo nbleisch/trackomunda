@@ -10,6 +10,7 @@ import kotlinx.css.backgroundColor
 import kotlinx.css.px
 import kotlinx.css.width
 import react.*
+import react.dom.h3
 import styled.StyleSheet
 import styled.css
 import trackomunda.model.GangPayload
@@ -41,15 +42,16 @@ class GangRosterSection : RComponent<RProps, GangState>() {
             }
         }
         state.gangPayload?.run {
-            mList {
-                css(themeStyles.list)
-                gangers.sortedBy { it.isReady }.forEach {
-                    mListItem(alignItems = MListItemAlignItems.flexStart, button = true) {
-                        GangerCard(it)
-                    }
+            h3 {
+                +"$gang_name"
+            }
+
+            gangers.sortedBy { it.isReady }.forEach {
+                gangerCard {
+                    ganger = it
                 }
             }
-        }
+        } ?: h3 { +"Gang konnte nicht geladen werden" }
     }
 }
 

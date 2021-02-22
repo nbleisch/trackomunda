@@ -26,6 +26,6 @@ data class Ganger(
     val advance_count: Int,
     val equipment: List<Equipment>,
     val skills: List<String>,
-    val isReady: Boolean?
+    var isReady: Boolean? = null
 )
 
