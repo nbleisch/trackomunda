@@ -1,8 +1,6 @@
 package trackomunda.model
 
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class Ganger(
     val ganger_id: String,
     val label_id: String,

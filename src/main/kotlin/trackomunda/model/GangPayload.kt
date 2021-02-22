@@ -1,8 +1,6 @@
 package trackomunda.model
 
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class GangPayload(
     val gangers: List<Ganger>,
     //TODO: Make it lowerCamelCase and use JsonProperty for the mapping
