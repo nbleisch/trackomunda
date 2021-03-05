@@ -1,7 +1,9 @@
 package trackomunda.components
 
 import clients.fetchGang
+import com.ccfraser.muirwik.components.mContainer
 import com.ccfraser.muirwik.components.spacingUnits
+import com.ccfraser.muirwik.components.styles.Breakpoint
 import com.ccfraser.muirwik.components.table.*
 import react.RBuilder
 import react.RComponent
@@ -23,24 +25,26 @@ class GangerCard : RComponent<GangerProps, RState>() {
     val gangerAttributes = listOf(Ganger::m, Ganger::ws, Ganger::bs, Ganger::s, Ganger::t, Ganger::w, Ganger::i, Ganger::a, Ganger::ld, Ganger::cl, Ganger::wil, Ganger::int, Ganger::xp)
 
     override fun RBuilder.render() {
-        h3 { +props.ganger.name }
-        mTable {
-           css(css {
-                //padding(1.spacingUnits)
-               padding(0.spacingUnits)
-               //padding(LinearDimension.none)
-            })
-            mTableHead {
-                mTableRow {
-                    gangerAttributes.forEach {
-                        mTableCell { +it.name.toUpperCase() }
+        mContainer(maxWidth = Breakpoint.sm) {
+            css {
+            }
+            h3 { +props.ganger.name }
+            mTable {
+                css {
+                    padding(6.px, 24.px, 12.px, 0.px)
+                }
+                mTableHead {
+                    mTableRow {
+                        gangerAttributes.forEach {
+                            mTableCell { +it.name.toUpperCase() }
+                        }
                     }
                 }
-            }
-            mTableBody {
-                mTableRow {
-                    gangerAttributes.forEach {
-                        mTableCell { +"${it.get(props.ganger)}" }
+                mTableBody {
+                    mTableRow {
+                        gangerAttributes.forEach {
+                            mTableCell { +"${it.get(props.ganger)}" }
+                        }
                     }
                 }
             }
