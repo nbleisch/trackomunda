@@ -1,44 +1,0 @@
-Œ2022-08-05 14:21:06.422 [Test worker] INFO  org.eclipse.jetty.util.log - Logging initialized @930ms to org.eclipse.jetty.util.log.Slf4jLog
-Å2022-08-05 14:21:06.664 [Test worker] INFO  org.eclipse.jetty.server.Server - jetty-9.4.46.v20220331; built: 2022-03-31T16:38:08.030Z; git: bc17a0369a11ecf40bb92c839b9ef0a8ac50ea18; jvm 11.0.8+10
-š2022-08-05 14:21:06.694 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@b967222{/__admin,null,AVAILABLE}
-Þ2022-08-05 14:21:06.702 [Test worker] INFO  o.e.j.s.handler.ContextHandler.ROOT - RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
-”2022-08-05 14:21:06.703 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6136998b{/,null,AVAILABLE}
-«2022-08-05 14:21:06.715 [Test worker] INFO  o.e.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@328572f0{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:61605}
-_2022-08-05 14:21:06.715 [Test worker] INFO  org.eclipse.jetty.server.Server - Started @1225ms
-z2022-08-05 14:21:07.180 [Test worker @coroutine#1] INFO  io.ktor.client.HttpClient - REQUEST: http://localhost:61605/gang
-METHOD: HttpMethod(value=GET)
-COMMON HEADERS
--> Accept: */*
--> Accept-Charset: UTF-8
-CONTENT HEADERS
--> Content-Length: 0
-o2022-08-05 14:21:07.399 [Test worker @coroutine#1] INFO  io.ktor.client.HttpClient - RESPONSE: 400 Bad Request
-METHOD: HttpMethod(value=GET)
-"FROM: http://localhost:61605/gang
-COMMON HEADERS
-:-> matched-stub-id: 46810b44-8d02-4619-9510-fa95ab314184
-«2022-08-05 14:21:07.436 [Test worker] INFO  o.e.jetty.server.AbstractConnector - Stopped NetworkTrafficServerConnector@328572f0{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:61605}
-’2022-08-05 14:21:07.438 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@6136998b{/,null,STOPPED}
-˜2022-08-05 14:21:07.438 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@b967222{/__admin,null,STOPPED}
-Å2022-08-05 14:21:07.443 [Test worker] INFO  org.eclipse.jetty.server.Server - jetty-9.4.46.v20220331; built: 2022-03-31T16:38:08.030Z; git: bc17a0369a11ecf40bb92c839b9ef0a8ac50ea18; jvm 11.0.8+10
-›2022-08-05 14:21:07.444 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@484149eb{/__admin,null,AVAILABLE}
-Þ2022-08-05 14:21:07.445 [Test worker] INFO  o.e.j.s.handler.ContextHandler.ROOT - RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
-”2022-08-05 14:21:07.445 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@14c141c0{/,null,AVAILABLE}
-«2022-08-05 14:21:07.447 [Test worker] INFO  o.e.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@1200458e{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:61614}
-_2022-08-05 14:21:07.447 [Test worker] INFO  org.eclipse.jetty.server.Server - Started @1956ms
-z2022-08-05 14:21:07.458 [Test worker @coroutine#5] INFO  io.ktor.client.HttpClient - REQUEST: http://localhost:61614/gang
-METHOD: HttpMethod(value=GET)
-COMMON HEADERS
--> Accept: */*
--> Accept-Charset: UTF-8
-CONTENT HEADERS
--> Content-Length: 0
-f2022-08-05 14:21:07.469 [Test worker @coroutine#5] INFO  io.ktor.client.HttpClient - RESPONSE: 200 OK
-METHOD: HttpMethod(value=GET)
-"FROM: http://localhost:61614/gang
-COMMON HEADERS
-9-> matched-stub-id: e22d4739-1392-4385-8ada-168f87e5cee4
-&-> vary: Accept-Encoding, User-Agent
-«2022-08-05 14:21:07.625 [Test worker] INFO  o.e.jetty.server.AbstractConnector - Stopped NetworkTrafficServerConnector@1200458e{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:61614}
-’2022-08-05 14:21:07.626 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@14c141c0{/,null,STOPPED}
-™2022-08-05 14:21:07.626 [Test worker] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@484149eb{/__admin,null,STOPPED}
