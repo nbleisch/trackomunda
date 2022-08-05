@@ -3,13 +3,16 @@ package com.trackomunda.plugins
 import com.trackomunda.model.Game
 import com.trackomunda.plugins.GamesLoc.GameLoc
 import com.trackomunda.services.GameService
+import com.trackomunda.services.YakTribeGangFetcher
 import io.ktor.http.*
+import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
 import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
 import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -27,7 +30,8 @@ fun Application.configureRouting() {
     }
     install(Locations)
 
-    val gameService: GameService = GameService()
+    val gameService = GameService()
+    val yakTribeGangFetcher = YakTribeGangFetcher()
 
 
     routing {
@@ -45,6 +49,23 @@ fun Application.configureRouting() {
             val newGame = gameService.createGame()
             call.respondRedirect(application.locations.href(GameLoc(id = newGame.id, games = GamesLoc())))
         }
+
+        post("/games") {
+            val postPayload = call.parameters
+            val newGame = gameService.createGame()
+            call.respondRedirect(application.locations.href(GameLoc(id = newGame.id, games = GamesLoc())))
+        }
+
+        post("/games/{id}/new-gang") {
+            gameService.findGame(call.parameters["id"]!!)?.let { game ->
+                val parameters = call.receive<Parameters>()
+                val yakTribeUrl = parameters["yakTribeGangUrl"].orEmpty()
+                val gang = yakTribeGangFetcher.fetchGang(Url(yakTribeUrl))
+                gameService.update(game.copy(gang = gang))
+                call.respondRedirect(application.locations.href(GameLoc(id = game.id, games = GamesLoc())))
+            } ?: call.response.status(NotFound)
+        }
+
 
         // Register nested routes
         get<GameLoc> {
