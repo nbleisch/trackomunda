@@ -7,8 +7,8 @@ class GameService {
 
     private val games: MutableMap<String, Game> = mutableMapOf()
 
-    fun createGame(): Game {
-        val newGame = Game(id = UUID.randomUUID().toString())
+    fun createGame(gameName : String): Game {
+        val newGame = Game(id = UUID.randomUUID().toString(), name = gameName)
         games[newGame.id] = newGame
         return newGame
     }

@@ -7,7 +7,6 @@ import com.trackomunda.services.YakTribeGangFetcher
 import io.ktor.http.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.server.application.*
-import io.ktor.server.freemarker.*
 import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
 import io.ktor.server.plugins.autohead.*
@@ -15,6 +14,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.thymeleaf.*
 
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Application.configureRouting() {
@@ -41,18 +41,11 @@ fun Application.configureRouting() {
         get<GamesLoc> {
             //Fetch Games
             val games: List<Game> = gameService.getGames()
-            call.respond(FreeMarkerContent(template = "games.ftl", model = mapOf("games" to games)))
+            call.respond(ThymeleafContent(template = "games", model = mapOf("games" to games)))
         }
 
         post("/games") {
-            val postPayload = call.parameters
-            val newGame = gameService.createGame()
-            call.respondRedirect(application.locations.href(GameLoc(id = newGame.id, games = GamesLoc())))
-        }
-
-        post("/games") {
-            val postPayload = call.parameters
-            val newGame = gameService.createGame()
+            val newGame = gameService.createGame(call.receive<Parameters>()["gameName"].orEmpty())
             call.respondRedirect(application.locations.href(GameLoc(id = newGame.id, games = GamesLoc())))
         }
 
@@ -66,12 +59,13 @@ fun Application.configureRouting() {
             } ?: call.response.status(NotFound)
         }
 
-
         // Register nested routes
         get<GameLoc> {
             //Fetch Game
-            val game = gameService.findGame(it.id)
-            call.respond(FreeMarkerContent(template = "game.ftl", model = mapOf("game" to game)))
+            gameService.findGame(it.id)?.let {
+                call.respond(ThymeleafContent(template = "game", model = mapOf("game" to it)))
+            } ?: call.response.status(NotFound)
+
         }
         // Static plugin. Try to access `/static/index.html`
         static("/static") {
