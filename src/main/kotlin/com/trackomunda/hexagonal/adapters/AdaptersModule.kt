@@ -1,5 +1,6 @@
 package com.trackomunda.hexagonal.adapters
 
+import com.trackomunda.hexagonal.adapters.driven.InMemoryGameRepository
 import com.trackomunda.hexagonal.ports.GameRepository
 import com.trackomunda.hexagonal.ports.GangImporter
 import org.koin.core.module.dsl.bind

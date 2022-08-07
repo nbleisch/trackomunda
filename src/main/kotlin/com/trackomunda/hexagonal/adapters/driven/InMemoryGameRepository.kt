@@ -1,4 +1,4 @@
-package com.trackomunda.hexagonal.adapters
+package com.trackomunda.hexagonal.adapters.driven
 
 import com.trackomunda.hexagonal.core.Game
 import com.trackomunda.hexagonal.ports.GameRepository
