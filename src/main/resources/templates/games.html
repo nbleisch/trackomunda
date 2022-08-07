@@ -5,14 +5,19 @@
 <body>
 <div th:insert="~{base :: common_navigation}"></div>
 
-<form method="post">
-    <input type="text" value="Name of Game" name="gameName" />
-    <button type="submit">Create a new game</button>
-</form>
+<main>
+    <div class="content">
 
-<h1>Games:</h1>
-<ul th:each="game: ${games}">
-    <li><a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}"/></li>
-</ul>
+        <form method="post">
+            <input type="text" value="Name of Game" name="gameName"/>
+            <button type="submit">Create a new game</button>
+        </form>
+
+        <h1>Games:</h1>
+        <ul th:each="game: ${games}">
+            <li><a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}"/></li>
+        </ul>
+    </div>
+</main>
 </body>
 </html>

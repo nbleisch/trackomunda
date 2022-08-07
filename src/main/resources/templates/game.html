@@ -6,21 +6,24 @@
 
 <div th:insert="~{base :: common_navigation}"></div>
 
-<h1 th:text="${game.name}"/>
+<main>
+    <div class="content">
+        <h1 th:text="${game.name}"/>
 
 
-<!-- IF CUSTOMER IS ANONYMOUS -->
-<div th:if="${game.gang != null}">
-    <h2 th:text="${game.gang.name}"></h2>
-</div>
-<!-- ELSE -->
-<div th:unless="${game.gang != null}">
-    <form method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
-        <label>
-            <input type="text" name="yakTribeGangUrl"/>
-        </label>
-        <button type="submit">Add your YaktribeGang</button>
-    </form>
-</div>
+        <!-- IF CUSTOMER IS ANONYMOUS -->
+        <div th:if="${game.gang != null}">
+            <h2 th:text="${game.gang.name}"></h2>
+        </div>
+        <!-- ELSE -->
+        <div th:unless="${game.gang != null}">
+            <form method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
+                <label for="yakTribeGangUrl">YakTribe Gang URL</label>
+                <input type="text" id="yakTribeGangUrl" name="yakTribeGangUrl"/>
+                <button type="submit">Add your YaktribeGang</button>
+            </form>
+        </div>
+    </div>
+</main>
 </body>
 </html>

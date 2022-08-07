@@ -22,7 +22,15 @@ fun Application.configureTemplating() {
             call.respondCss {
                 body {
                     backgroundColor = Color.white
-                    margin(0.px)
+                    margin(20.px)
+                }
+
+                rule("div.content") {
+                  /*  top = LinearDimension("20%")
+                    left = LinearDimension("50%")
+                    transform = Transforms().apply {
+                        translate(LinearDimension("-50%"), LinearDimension("-50%"))
+                    }*/
                 }
                 rule("h1.page-title") {
                     color = Color.black
