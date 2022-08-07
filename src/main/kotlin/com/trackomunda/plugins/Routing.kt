@@ -1,9 +1,9 @@
 package com.trackomunda.plugins
 
-import com.trackomunda.model.Game
+import com.trackomunda.hexagonal.core.Game
+import com.trackomunda.hexagonal.core.GameUseCases
+import com.trackomunda.hexagonal.ports.GangImporter
 import com.trackomunda.plugins.GamesLoc.GameLoc
-import com.trackomunda.services.GameService
-import com.trackomunda.services.YakTribeGangFetcher
 import io.ktor.http.*
 import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.server.application.*
@@ -15,6 +15,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.thymeleaf.*
+import org.koin.ktor.ext.inject
 
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Application.configureRouting() {
@@ -30,9 +31,8 @@ fun Application.configureRouting() {
     }
     install(Locations)
 
-    val gameService = GameService()
-    val yakTribeGangFetcher = YakTribeGangFetcher()
-
+    val gamesUseCases: GameUseCases by inject()
+    val gangImporter: GangImporter by inject()
 
     routing {
         get("/") {
@@ -40,21 +40,21 @@ fun Application.configureRouting() {
         }
         get<GamesLoc> {
             //Fetch Games
-            val games: List<Game> = gameService.getGames()
+            val games: List<Game> = gamesUseCases.findAllGames()
             call.respond(ThymeleafContent(template = "games", model = mapOf("games" to games)))
         }
 
         post("/games") {
-            val newGame = gameService.createGame(call.receive<Parameters>()["gameName"].orEmpty())
+            val newGame = gamesUseCases.createANewGame(call.receive<Parameters>()["gameName"].orEmpty())
             call.respondRedirect(application.locations.href(GameLoc(id = newGame.id, games = GamesLoc())))
         }
 
         post("/games/{id}/new-gang") {
-            gameService.findGame(call.parameters["id"]!!)?.let { game ->
+            gamesUseCases.findGame(call.parameters["id"]!!)?.let { game ->
                 val parameters = call.receive<Parameters>()
                 val yakTribeUrl = parameters["yakTribeGangUrl"].orEmpty()
-                val gang = yakTribeGangFetcher.fetchGang(Url(yakTribeUrl))
-                gameService.update(game.copy(gang = gang))
+                val gang = gangImporter.importGang(yakTribeUrl)
+                gamesUseCases.updateGame(game.copy(gang = gang))
                 call.respondRedirect(application.locations.href(GameLoc(id = game.id, games = GamesLoc())))
             } ?: call.response.status(NotFound)
         }
@@ -62,7 +62,7 @@ fun Application.configureRouting() {
         // Register nested routes
         get<GameLoc> {
             //Fetch Game
-            gameService.findGame(it.id)?.let {
+            gamesUseCases.findGame(it.id)?.let {
                 call.respond(ThymeleafContent(template = "game", model = mapOf("game" to it)))
             } ?: call.response.status(NotFound)
 
@@ -77,8 +77,10 @@ fun Application.configureRouting() {
 class AuthenticationException : RuntimeException()
 class AuthorizationException : RuntimeException()
 
+@OptIn(KtorExperimentalLocationsAPI::class)
 @Location("/games")
 class GamesLoc {
+    @OptIn(KtorExperimentalLocationsAPI::class)
     @Location("/{id}")
     data class GameLoc(val id: String, val games: GamesLoc)
 }

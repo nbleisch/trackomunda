@@ -5,15 +5,14 @@ import com.marcinziolo.kotlin.wiremock.any
 import com.marcinziolo.kotlin.wiremock.equalTo
 import com.marcinziolo.kotlin.wiremock.get
 import com.marcinziolo.kotlin.wiremock.returns
-import com.trackomunda.services.YakTribeFetchException
-import com.trackomunda.services.YakTribeGangFetcher
-import io.ktor.http.*
+import com.trackomunda.hexagonal.adapters.YakTribeFetchException
+import com.trackomunda.hexagonal.adapters.YakTribeGangImporter
 import org.junit.Rule
 import java.net.ServerSocket
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class YaktribeFetcherTest {
+class YaktribeGangImporterTest {
     val port = findRandomPort()
     val url = "http://localhost:$port"
 
@@ -30,7 +29,7 @@ class YaktribeFetcherTest {
             statusCode = 200
             body = this::class.java.classLoader.getResource("yaktribe_test_gang.json")!!.readText()
         }
-        val gang = YakTribeGangFetcher().fetchGang(Url("$url/gang"))
+        val gang = YakTribeGangImporter().importGang("$url/gang")
         assertEquals(gang.name, "Cawdor1000")
         assertEquals(gang.ganger.size, 10)
     }
@@ -41,7 +40,7 @@ class YaktribeFetcherTest {
         } returns {
             statusCode = 400
         }
-        val gang = YakTribeGangFetcher().fetchGang(Url("$url/gang"))
+        YakTribeGangImporter().importGang("$url/gang")
     }
 
     private fun findRandomPort(): Int {

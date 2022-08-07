@@ -1,4 +1,4 @@
-package com.trackomunda.model
+package com.trackomunda.hexagonal.core
 
 import java.time.LocalDate
 
