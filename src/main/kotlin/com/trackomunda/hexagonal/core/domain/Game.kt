@@ -56,6 +56,11 @@ class Game(
         TODO("Not yet implemented")
     }
 
+    fun activateFighter(){
+
+    }
+
+
     fun copy() = Game(id = id, name = name, gang = gang, date = createdDate, round = round)
 
     override fun equals(other: Any?): Boolean {
