@@ -1,6 +1,6 @@
 package com.trackomunda.hexagonal.adapters.driver.ktor
 
-import com.trackomunda.hexagonal.core.GameUseCases
+import com.trackomunda.hexagonal.core.services.GameService
 import com.trackomunda.hexagonal.ports.GangImporter
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -15,7 +15,7 @@ import org.koin.ktor.ext.inject
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
 
-    val gamesUseCases: GameUseCases by inject()
+    val gamesUseCases: GameService by inject()
     val gangImporter: GangImporter by inject()
 
     //TODO: Would like to work with LocationClasses but couldnt get them working with Post
@@ -38,11 +38,8 @@ fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
         }
 
         post("new-gang") {
-            gamesUseCases.findGame(call.parameters["id"]!!)?.let { game ->
-                val parameters = call.receive<Parameters>()
-                val yakTribeUrl = parameters["yakTribeGangUrl"].orEmpty()
-                val gang = gangImporter.importGang(yakTribeUrl)
-                gamesUseCases.updateGame(game.copy(gang = gang))
+            val parameters = call.receive<Parameters>()
+            gamesUseCases.addGangToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl"].orEmpty())?.let {
                 call.respondRedirect {
                     this.path(this.encodedPath.removeSuffix("/new-gang"))
                 }

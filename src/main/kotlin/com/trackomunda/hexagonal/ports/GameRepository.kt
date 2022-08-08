@@ -1,6 +1,6 @@
 package com.trackomunda.hexagonal.ports
 
-import com.trackomunda.hexagonal.core.Game
+import com.trackomunda.hexagonal.core.domain.Game
 
 interface GameRepository {
 
@@ -8,7 +8,7 @@ interface GameRepository {
 
     fun findGame(id: String): Game?
 
-    fun update(game: Game)
+    fun update(game: Game) : Game
 
     fun findAllGames(): List<Game>
 

@@ -1,6 +1,6 @@
 package com.trackomunda.hexagonal.adapters.driven
 
-import com.trackomunda.hexagonal.core.Game
+import com.trackomunda.hexagonal.core.domain.Game
 import com.trackomunda.hexagonal.ports.GameRepository
 import java.util.*
 
@@ -13,10 +13,12 @@ class InMemoryGameRepository : GameRepository {
         games[newGame.id] = newGame
         return newGame
     }
+
     override fun findGame(id: String) = games[id]?.copy()
 
-    override fun update(game: Game) {
+    override fun update(game: Game): Game {
         games[game.id] = game
+        return game
     }
 
     override fun findAllGames(): List<Game> {

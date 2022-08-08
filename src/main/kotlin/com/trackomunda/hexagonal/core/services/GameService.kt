@@ -1,9 +1,10 @@
-package com.trackomunda.hexagonal.core
+package com.trackomunda.hexagonal.core.services
 
+import com.trackomunda.hexagonal.core.domain.Game
 import com.trackomunda.hexagonal.ports.GameRepository
 import com.trackomunda.hexagonal.ports.GangImporter
 
-class GameUseCases(val gameRepository: GameRepository, val gangImporter: GangImporter) {
+class GameService(val gameRepository: GameRepository, val gangImporter: GangImporter) {
 
     fun createANewGame(nameOfGame: String): Game {
         return gameRepository.createGame(nameOfGame)
@@ -21,5 +22,10 @@ class GameUseCases(val gameRepository: GameRepository, val gangImporter: GangImp
         return gameRepository.findGame(id)
     }
 
-
+    fun addGangToGame(gameId: String, gangUrl: String): Game? {
+        return gameRepository.findGame(gameId)?.let { game ->
+            game.addGang(gangImporter.importGang(gangUrl))
+            gameRepository.update(game)
+        }
+    }
 }

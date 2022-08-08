@@ -1,4 +1,4 @@
-package com.trackomunda.hexagonal.core
+package com.trackomunda.hexagonal.core.domain
 
 data class Gang(
     val name: String,

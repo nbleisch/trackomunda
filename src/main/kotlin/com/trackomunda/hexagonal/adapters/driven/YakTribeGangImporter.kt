@@ -3,8 +3,8 @@ package com.trackomunda.hexagonal.adapters
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.trackomunda.hexagonal.core.Gang
-import com.trackomunda.hexagonal.core.Ganger
+import com.trackomunda.hexagonal.core.domain.Gang
+import com.trackomunda.hexagonal.core.domain.Ganger
 import com.trackomunda.hexagonal.ports.GangImporter
 import io.ktor.client.*
 import io.ktor.client.plugins.*
