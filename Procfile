@@ -1,1 +1,1 @@
-web: ./build/install/com.trackomund/trackomunda/bin/com.trackomund.trackomunda
+web: ./build/install/com.trackomund.trackomunda/bin/com.trackomund.trackomunda
