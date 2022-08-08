@@ -55,8 +55,5 @@ dependencies {
 }
 
 tasks {
-    register("stage")
-    "stage" {
-        dependsOn(build, clean)
-    }
+    create("stage").dependsOn(build, installDist)
 }
