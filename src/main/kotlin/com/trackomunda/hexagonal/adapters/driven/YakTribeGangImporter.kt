@@ -12,7 +12,6 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
-import java.lang.Integer.parseInt
 
 class YakTribeFetchException(message: String, origin: Throwable) : RuntimeException(message, origin)
 
@@ -57,14 +56,14 @@ class YakTribeGangImporter : GangImporter {
                             weaponSkill = yakTribeGanger.w,
                             ballisticSkill = yakTribeGanger.bs,
                             strength = yakTribeGanger.s,
-                            toughness = yakTribeGanger.t,
-                            wounds = parseInt(yakTribeGanger.w),
+                            toughness = yakTribeGanger.t.toInt(),
+                            wounds = yakTribeGanger.w.toInt(),
                             initiative = yakTribeGanger.i,
                             attacks = yakTribeGanger.a,
-                            leadership = yakTribeGanger.ld,
-                            coolness = yakTribeGanger.cl,
-                            willpower = yakTribeGanger.wil,
-                            intelligence = yakTribeGanger.int,
+                            leadership = yakTribeGanger.ld.toInt(),
+                            coolness = yakTribeGanger.cl.toInt(),
+                            willpower = yakTribeGanger.wil.toInt(),
+                            intelligence = yakTribeGanger.int.toInt(),
                         )
                     }
                 )

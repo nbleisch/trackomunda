@@ -1,5 +1,6 @@
 package com.trackomunda.hexagonal.core.domain
 
+import kotlin.math.min
 import kotlin.properties.Delegates
 
 data class Ganger(
@@ -8,14 +9,14 @@ data class Ganger(
     val weaponSkill: String,
     val ballisticSkill: String,
     val strength: String,
-    val toughness: String,
+    val toughness: Int,
     val wounds: Int,
     val initiative: String,
     val attacks: String,
-    val leadership: String,
-    val coolness: String,
-    val willpower: String,
-    val intelligence: String,
+    val leadership: Int,
+    val coolness: Int,
+    val willpower: Int,
+    val intelligence: Int,
 ) {
     var isOutOfAction: Boolean by Delegates.notNull()
     var isReady: Boolean by Delegates.notNull()
@@ -26,11 +27,29 @@ data class Ganger(
         private set
     var isInsane: Boolean by Delegates.notNull()
         private set
-    var currentWounds: Int = wounds
+    var currentWounds: Int by Delegates.notNull()
         private set
+    var currentToughness: Int by Delegates.notNull()
+        private set
+
 
     init {
         reset()
+    }
+
+    fun hitWithBlaze(diceRoll: OneD6) {
+        if (diceRoll >= 4) isBlazed = true
+    }
+
+    fun hitWithCurse(diceRoll: TwoD6) {
+        if (diceRoll < willpower) isInsane = true
+    }
+
+    fun applyDamage(damage: Int) {
+        currentWounds = min(0, currentWounds - damage)
+        if(currentWounds == 0){
+            isSeriouslyInjured = true
+        }
     }
 
     fun reset() {
@@ -38,5 +57,9 @@ data class Ganger(
         isReady = true
         isPartOfCrew = false
         isSeriouslyInjured = false
+        isBlazed = false
+        isInsane = false
+        currentWounds = wounds
+        currentToughness = toughness
     }
 }
