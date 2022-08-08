@@ -11,7 +11,7 @@ data class Gang(
             return ganger.filter { it.isPartOfCrew }.size
         }
 
-    protected fun calculateBottleCheckModifier() = ganger.filter { it.isPartOfCrew && (it.isOutOfAction || it.isSeriouslyInjured) }.size
+    fun calculateBottleCheckModifier() = ganger.filter { it.isPartOfCrew && (it.isOutOfAction || it.isSeriouslyInjured) }.size
 
     internal fun noFighterIsReady(): Boolean {
         TODO("Not yet implemented")
