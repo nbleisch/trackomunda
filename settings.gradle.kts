@@ -1,1 +1,1 @@
-rootProject.name = "com.trackomund.trackomunda"
+rootProject.name = "trackomunda"
