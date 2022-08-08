@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:18.0.1
+    steps:
+      - checkout
+      - run:
+          name: "build and test"
+          command: "./gradlew clean test"
+
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - build-and-test

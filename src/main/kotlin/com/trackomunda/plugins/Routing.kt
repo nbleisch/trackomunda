@@ -30,6 +30,10 @@ fun Application.configureRouting() {
         }
         gameAPI("games")
 
+        get("/json/serialization") {
+            call.respond(mapOf("hello" to "world"))
+        }
+
         // Static plugin. Try to access `/static/index.html`
         static("/static") {
             resources("static")
