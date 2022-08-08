@@ -8,6 +8,9 @@ plugins {
     kotlin("jvm") version "1.7.10"
 }
 
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
+
 group = "com.trackomunda"
 version = "0.0.1"
 application {
@@ -53,7 +56,7 @@ dependencies {
 
 tasks {
     register("stage")
-    "stage"{
+    "stage" {
         dependsOn(build, clean)
     }
 }

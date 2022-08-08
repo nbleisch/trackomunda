@@ -20,7 +20,7 @@
         <h2>Games</h2>
     </div>
 
-    <ul class="list-group col-md-4" th:each="game: ${games}">
+    <ul class="list-group col-md-5" th:each="game: ${games}">
         <li class="list-group-item list-group-item-action">
             <a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}">another game</a></li>
     </ul>
