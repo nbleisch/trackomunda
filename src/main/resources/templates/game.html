@@ -9,12 +9,19 @@
 
 <main>
     <div class="content">
-        <h1 th:text="${game.name}"/>
+        <h1 th:text="${game.name}"></h1>
 
 
-        <!-- IF CUSTOMER IS ANONYMOUS -->
+        <!-- IF A Gang has already been assigned -->
         <div th:if="${game.gang != null}">
-            <h2 th:text="${game.gang.name}"></h2>
+            <div class="gang-card">
+                <h3 th:text="${game.gang.name}"></h3>
+                <div class="ganger-cards" th:each="ganger: ${game.gang.ganger}">
+                    <div class="ganger-card">
+                        <span th:text="${ganger.name}"></span>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- ELSE -->
         <div th:unless="${game.gang != null}">
