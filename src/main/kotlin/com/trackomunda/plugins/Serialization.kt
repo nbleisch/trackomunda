@@ -12,12 +12,5 @@ fun Application.configureSerialization() {
         jackson {
                 enable(SerializationFeature.INDENT_OUTPUT)
             }
-
-    }
-
-    routing {
-        get("/json/jackson") {
-                call.respond(mapOf("hello" to "world"))
-            }
     }
 }
