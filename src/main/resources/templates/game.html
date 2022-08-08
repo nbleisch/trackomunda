@@ -64,10 +64,12 @@
     </div>
     <!-- ELSE -->
     <div th:unless="${game.gang != null}">
-        <form method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
-            <label for="yakTribeGangUrl">YakTribe Gang URL</label>
-            <input type="text" id="yakTribeGangUrl" name="yakTribeGangUrl"/>
-            <button type="submit">Add your YaktribeGang</button>
+        <form class="form-inline" method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
+            <div class="form-group">
+                <label class="sr-only" for="yakTribeGangUrl">YakTribe Gang URL</label>
+                <input type="text" class="form-control" id="yakTribeGangUrl" placeholder="https://yaktribe.games/underhive/json/gang/293915.json" name="yakTribeGangUrl"/>
+            </div>
+            <button class="btn btn-primary mb-2" type="submit">Add your YaktribeGang</button>
         </form>
     </div>
 </div>

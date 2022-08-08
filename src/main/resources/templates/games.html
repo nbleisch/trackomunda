@@ -6,21 +6,24 @@
 <body>
 <div th:replace="~{base :: common_navigation(~{::/games})}"></div>
 
+
 <div class="container" role="main">
+
+    <div class="jumbotron">
+        <form class="form-inline" method="post">
+            <input type="text" class="form-control" placeholder="Name your Game!" name="gameName" required/>
+            <button type="submit" class="btn btn-primary mb-2">Create a new game</button>
+        </form>
+    </div>
+
     <div class="page-header">
         <h2>Games</h2>
     </div>
 
-    <form method="post">
-        <input type="text" value="Name of Game" name="gameName"/>
-        <button type="submit">Create a new game</button>
-    </form>
-
-    <div class="container">
-        <ul th:each="game: ${games}">
-            <li><a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}"/></li>
-        </ul>
-    </div>
+    <ul class="list-group col-md-4" th:each="game: ${games}">
+        <li class="list-group-item list-group-item-action">
+            <a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}">another game</a></li>
+    </ul>
 </div>
 </body>
 </html>

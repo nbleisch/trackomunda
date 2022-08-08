@@ -44,6 +44,18 @@ class Game(
         round += 1
     }
 
+    fun startGame(){
+        TODO("Not yet implemented")
+    }
+
+    fun randomSelect(){
+        TODO("Not yet implemented")
+    }
+
+    fun customSelect(){
+        TODO("Not yet implemented")
+    }
+
     fun copy() = Game(id = id, name = name, gang = gang, date = createdDate, round = round)
 
     override fun equals(other: Any?): Boolean {

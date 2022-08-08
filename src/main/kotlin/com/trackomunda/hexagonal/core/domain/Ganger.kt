@@ -9,7 +9,7 @@ data class Ganger(
     val ballisticSkill: String,
     val strength: String,
     val toughness: String,
-    val wounds: String,
+    val wounds: Int,
     val initiative: String,
     val attacks: String,
     val leadership: String,
@@ -21,6 +21,13 @@ data class Ganger(
     var isReady: Boolean by Delegates.notNull()
     var isPartOfCrew: Boolean by Delegates.notNull()
     var isSeriouslyInjured: Boolean by Delegates.notNull()
+        private set
+    var isBlazed: Boolean by Delegates.notNull()
+        private set
+    var isInsane: Boolean by Delegates.notNull()
+        private set
+    var currentWounds: Int = wounds
+        private set
 
     init {
         reset()
