@@ -30,6 +30,19 @@ class Game(
         this.gang = gang
     }
 
+    fun reset() {
+        gang?.reset()
+        round = 1
+    }
+
+    fun nextRound() {
+        gang?.run {
+            check(noFighterIsReady())
+            makeAllFightersReady()
+        } ?: checkNotNull(gang)
+        checkNotNull(gang)
+        round += 1
+    }
 
     fun copy() = Game(id = id, name = name, gang = gang, date = createdDate, round = round)
 
