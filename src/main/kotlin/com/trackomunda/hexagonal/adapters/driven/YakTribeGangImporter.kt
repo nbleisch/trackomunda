@@ -50,7 +50,21 @@ class YakTribeGangImporter : GangImporter {
                 Gang(
                     name = yaktribeGang.gang_name,
                     ganger = yaktribeGang.gangers.map { yakTribeGanger ->
-                        Ganger(name = yakTribeGanger.name)
+                        Ganger(
+                            name = yakTribeGanger.name,
+                            movement = yakTribeGanger.m,
+                            weaponSkill = yakTribeGanger.w,
+                            ballisticSkill = yakTribeGanger.bs,
+                            strength = yakTribeGanger.s,
+                            toughness = yakTribeGanger.t,
+                            wounds = yakTribeGanger.w,
+                            initiative = yakTribeGanger.i,
+                            attacks = yakTribeGanger.a,
+                            leadership = yakTribeGanger.ld,
+                            coolness = yakTribeGanger.cl,
+                            willpower = yakTribeGanger.wil,
+                            intelligence = yakTribeGanger.int,
+                        )
                     }
                 )
             }

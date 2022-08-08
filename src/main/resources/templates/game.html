@@ -5,33 +5,71 @@
 </head>
 <body>
 
-<div th:insert="~{base :: common_navigation}"></div>
+<div th:replace="~{base ::  common_navigation(~{::/na})}"></div>
 
-<main>
-    <div class="content">
-        <h1 th:text="${game.name}"></h1>
-
-
-        <!-- IF A Gang has already been assigned -->
-        <div th:if="${game.gang != null}">
-            <div class="gang-card">
-                <h3 th:text="${game.gang.name}"></h3>
-                <div class="ganger-cards" th:each="ganger: ${game.gang.ganger}">
-                    <div class="ganger-card">
-                        <span th:text="${ganger.name}"></span>
+<div class="container" role="main">
+    <h2 th:text="${game.name}"></h2>
+    <!-- IF A Gang has already been assigned -->
+    <div th:if="${game.gang != null}">
+        <div class="gang-card">
+            <h3 th:text="${game.gang.name}"></h3>
+            <div class="ganger-cards" th:each="ganger: ${game.gang.ganger}">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" th:text="${ganger.name}">Ganger Name</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>M</th>
+                                        <th>WS</th>
+                                        <th>BS</th>
+                                        <th>S</th>
+                                        <th>T</th>
+                                        <th>W</th>
+                                        <th>I</th>
+                                        <th>A</th>
+                                        <th>LD</th>
+                                        <th>Cl</th>
+                                        <th>Wil</th>
+                                        <th>Int</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${ganger.movement}">M</td>
+                                        <td th:text="${ganger.weaponSkill}">WS</td>
+                                        <td th:text="${ganger.ballisticSkill}">BS</td>
+                                        <td th:text="${ganger.strength}">S</td>
+                                        <td th:text="${ganger.toughness}">T</td>
+                                        <td th:text="${ganger.wounds}">W</td>
+                                        <td th:text="${ganger.initiative}">I</td>
+                                        <td th:text="${ganger.attacks}">A</td>
+                                        <td th:text="${ganger.leadership}">LD</td>
+                                        <td th:text="${ganger.coolness}">Cl</td>
+                                        <td th:text="${ganger.willpower}">Wil</td>
+                                        <td th:text="${ganger.intelligence}">Int</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ELSE -->
-        <div th:unless="${game.gang != null}">
-            <form method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
-                <label for="yakTribeGangUrl">YakTribe Gang URL</label>
-                <input type="text" id="yakTribeGangUrl" name="yakTribeGangUrl"/>
-                <button type="submit">Add your YaktribeGang</button>
-            </form>
-        </div>
     </div>
-</main>
+    <!-- ELSE -->
+    <div th:unless="${game.gang != null}">
+        <form method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
+            <label for="yakTribeGangUrl">YakTribe Gang URL</label>
+            <input type="text" id="yakTribeGangUrl" name="yakTribeGangUrl"/>
+            <button type="submit">Add your YaktribeGang</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

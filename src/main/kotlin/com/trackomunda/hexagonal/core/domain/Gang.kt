@@ -3,14 +3,13 @@ package com.trackomunda.hexagonal.core.domain
 data class Gang(
     val name: String,
     val ganger: List<Ganger>,
-
     var isBottleCheckWasRequired: Boolean = false
 ) {
     val startingCrewSize: Int
         get() {
             return ganger.filter { it.isPartOfCrew }.size
         }
-
+ 
     fun calculateBottleCheckModifier() = ganger.filter { it.isPartOfCrew && (it.isOutOfAction || it.isSeriouslyInjured) }.size
 
     internal fun noFighterIsReady(): Boolean {

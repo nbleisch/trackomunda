@@ -4,21 +4,23 @@
     <title>Games Overview</title>
 </head>
 <body>
-<div th:insert="~{base :: common_navigation}"></div>
+<div th:replace="~{base :: common_navigation(~{::/games})}"></div>
 
-<main>
-    <div class="content">
+<div class="container" role="main">
+    <div class="page-header">
+        <h2>Games</h2>
+    </div>
 
-        <form method="post">
-            <input type="text" value="Name of Game" name="gameName"/>
-            <button type="submit">Create a new game</button>
-        </form>
+    <form method="post">
+        <input type="text" value="Name of Game" name="gameName"/>
+        <button type="submit">Create a new game</button>
+    </form>
 
-        <h1>Games:</h1>
+    <div class="container">
         <ul th:each="game: ${games}">
             <li><a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}"/></li>
         </ul>
     </div>
-</main>
+</div>
 </body>
 </html>
