@@ -1,7 +1,7 @@
 package com.trackomunda.hexagonal.core.domain
 
 import com.trackomunda.hexagonal.core.domain.FighterStatus.STANDING
-import kotlin.math.min
+import java.lang.Integer.max
 import kotlin.properties.Delegates
 
 data class Ganger(
@@ -54,13 +54,13 @@ data class Ganger(
     }
 
     fun applyDamage(damage: Int) {
-        currentWounds = min(0, currentWounds - damage)
+        currentWounds = max(0, currentWounds - damage)
         if (currentWounds == 0) {
             isSeriouslyInjured = true
         }
     }
 
-    fun reset() {
+    fun reset(): Ganger {
         isOutOfAction = false
         isReady = true
         isPartOfCrew = false
@@ -70,5 +70,6 @@ data class Ganger(
         currentWounds = wounds
         currentToughness = toughness
         status = STANDING
+        return this
     }
 }

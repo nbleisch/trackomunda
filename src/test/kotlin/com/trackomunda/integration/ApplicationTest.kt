@@ -1,4 +1,4 @@
-package com.trackomunda
+package com.trackomunda.integration
 
 import com.trackomunda.plugins.configureKoin
 import com.trackomunda.plugins.configureRouting

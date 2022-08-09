@@ -1,4 +1,4 @@
-package com.trackomunda
+package com.trackomunda.adapter
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import com.marcinziolo.kotlin.wiremock.any
