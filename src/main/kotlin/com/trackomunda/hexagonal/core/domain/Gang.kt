@@ -1,5 +1,7 @@
 package com.trackomunda.hexagonal.core.domain
 
+import com.trackomunda.hexagonal.core.domain.FighterStatus.SERIOUSLY_INJURED
+
 data class Gang(
     val name: String,
     val ganger: List<Ganger>,
@@ -10,7 +12,7 @@ data class Gang(
             return ganger.filter { it.isPartOfCrew }.size
         }
  
-    fun calculateBottleCheckModifier() = ganger.filter { it.isPartOfCrew && (it.isOutOfAction || it.isSeriouslyInjured) }.size
+    fun calculateBottleCheckModifier() = ganger.filter { it.isPartOfCrew && (it.isOutOfAction || it.status == SERIOUSLY_INJURED) }.size
 
     internal fun noFighterIsReady(): Boolean {
         TODO("Not yet implemented")
