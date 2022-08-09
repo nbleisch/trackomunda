@@ -2,18 +2,21 @@ package com.trackomunda.hexagonal.core.domain
 
 import com.trackomunda.hexagonal.core.domain.FighterStatus.*
 
-sealed class FighterAction(val name: String, val status: FighterStatus = STANDING)
+sealed class FighterAction(val name: String, val requiredStatus: Set<FighterStatus> = setOf(STANDING), val additionalCondition: (Ganger) -> Boolean = { !it.isOutOfAction && !it.isBlazed })
 
 object Shoot : FighterAction("Shoot")
 object Move : FighterAction("Move")
 object Charge : FighterAction("Charge")
 object Reload : FighterAction("Reload")
 object FightVersatile : FighterAction("Fight Versatile")
+object RunForCover : FighterAction("Run for cover")
 
-object StandUp : FighterAction("Stand up", status = PRONE)
-object BlindFire : FighterAction("Blind fire", status = PRONE)
+object AttemptToPutTheFireOut : FighterAction("Attempt to put the fire out", setOf(STANDING, SERIOUSLY_INJURED, PRONE), additionalCondition = { it.isBlazed })
 
-object Fight : FighterAction("Fight", status = ENGAGED)
-object Retreat : FighterAction("Retreat", status = ENGAGED)
+object StandUp : FighterAction("Stand up", setOf(PRONE))
+object BlindFire : FighterAction("Blind fire", requiredStatus = setOf(PRONE))
 
-val FIGHTER_ACTIONS = listOf(Shoot, Move, Charge, Reload, FightVersatile, StandUp, BlindFire, Fight, Retreat)
+object Fight : FighterAction("Fight", requiredStatus = setOf(ENGAGED))
+object Retreat : FighterAction("Retreat", requiredStatus = setOf(ENGAGED))
+
+val FIGHTER_ACTIONS = listOf(Shoot, Move, Charge, Reload, FightVersatile, StandUp, BlindFire, Fight, Retreat, AttemptToPutTheFireOut)
