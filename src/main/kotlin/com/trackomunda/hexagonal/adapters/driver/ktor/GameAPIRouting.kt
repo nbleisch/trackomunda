@@ -9,6 +9,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.thymeleaf.*
+import io.ktor.server.util.*
 import org.koin.ktor.ext.inject
 
 
@@ -27,7 +28,7 @@ fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
 
     post() {
         val newGame = gamesUseCases.createANewGame(call.receive<Parameters>()["gameName"].orEmpty())
-        call.respondRedirect { this.appendPathSegments(newGame.id) }
+        call.respondRedirect(URLBuilder.createFromCall(call).appendPathSegments(newGame.id).build().encodedPath)
     }
 
     route("{id}") {
@@ -40,9 +41,7 @@ fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
         post("new-gang") {
             val parameters = call.receive<Parameters>()
             gamesUseCases.addGangToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl"].orEmpty())?.let {
-                call.respondRedirect {
-                    this.path(this.encodedPath.removeSuffix("/new-gang"))
-                }
+                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/new-gang"))
             } ?: call.response.status(HttpStatusCode.NotFound)
         }
     }
