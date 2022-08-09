@@ -20,10 +20,18 @@
         <h2>Games</h2>
     </div>
 
-    <ul class="list-group col-md-5">
-        <li class="list-group-item list-group-item-action" th:each="game: ${games}">
-            <a th:href="@{games/{gameId}(gameId=${game.id})}" th:text="${game.name}">another game</a></li>
-    </ul>
+    <div class="list-group col-md-auto">
+        <a th:each="game: ${games}" class="list-group-item list-group-item-action  d-flex gap-3 py-3" th:href="@{games/{gameId}(gameId=${game.id})}" aria-current="true">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h5 class="mb-0" th:text="${game.name}">another game</h5>
+                    <p class="mb-0 opacity-75" th:if="${game.gang != null}" th:text="${game.gang.name}">Gang Name</p>
+                    <p class="mb-0 opacity-75" th:unless="${game.gang != null}">No Gang selected yet</p>
+                </div>
+                <small class="opacity-50 text-nowrap" th:text="'Round ' + ${game.round}">Round</small>
+            </div>
+        </a>
+    </div>
 </div>
 </body>
 </html>
