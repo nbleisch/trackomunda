@@ -9,68 +9,137 @@
 
 <div class="container" role="main">
     <h2 th:text="${game.name}"></h2>
-    <!-- IF A Gang has already been assigned -->
-    <div th:if="${game.gang != null}">
-        <div class="gang-card">
-            <h3 th:text="${game.gang.name}"></h3>
-            <div class="ganger-cards" th:each="ganger: ${game.gang.ganger}">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title" th:text="${ganger.name}">Ganger Name</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>M</th>
-                                        <th>WS</th>
-                                        <th>BS</th>
-                                        <th>S</th>
-                                        <th>T</th>
-                                        <th>W</th>
-                                        <th>I</th>
-                                        <th>A</th>
-                                        <th>LD</th>
-                                        <th>Cl</th>
-                                        <th>Wil</th>
-                                        <th>Int</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td th:text="${ganger.movement}">M</td>
-                                        <td th:text="${ganger.weaponSkill}">WS</td>
-                                        <td th:text="${ganger.ballisticSkill}">BS</td>
-                                        <td th:text="${ganger.strength}">S</td>
-                                        <td th:text="${ganger.toughness}">T</td>
-                                        <td th:text="${ganger.wounds}">W</td>
-                                        <td th:text="${ganger.initiative}">I</td>
-                                        <td th:text="${ganger.attacks}">A</td>
-                                        <td th:text="${ganger.leadership}">LD</td>
-                                        <td th:text="${ganger.coolness}">Cl</td>
-                                        <td th:text="${ganger.willpower}">Wil</td>
-                                        <td th:text="${ganger.intelligence}">Int</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+    <div class="row">
+        <div class="col-sm">
+            <!-- IF A Gang1 has already been assigned -->
+            <div th:if="${game.gang1 != null}">
+                <div class="gang-card">
+                    <h3 th:text="${game.gang1.name}"></h3>
+                    <div class="ganger-cards" th:each="ganger: ${game.gang1.ganger}">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" th:text="${ganger.name}">Ganger Name</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>M</th>
+                                                <th>WS</th>
+                                                <th>BS</th>
+                                                <th>S</th>
+                                                <th>T</th>
+                                                <th>W</th>
+                                                <th>I</th>
+                                                <th>A</th>
+                                                <th>LD</th>
+                                                <th>Cl</th>
+                                                <th>Wil</th>
+                                                <th>Int</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${ganger.movement}">M</td>
+                                                <td th:text="${ganger.weaponSkill}">WS</td>
+                                                <td th:text="${ganger.ballisticSkill}">BS</td>
+                                                <td th:text="${ganger.strength}">S</td>
+                                                <td th:text="${ganger.toughness}">T</td>
+                                                <td th:text="${ganger.wounds}">W</td>
+                                                <td th:text="${ganger.initiative}">I</td>
+                                                <td th:text="${ganger.attacks}">A</td>
+                                                <td th:text="${ganger.leadership}">LD</td>
+                                                <td th:text="${ganger.coolness}">Cl</td>
+                                                <td th:text="${ganger.willpower}">Wil</td>
+                                                <td th:text="${ganger.intelligence}">Int</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- ELSE -->
-    <div th:unless="${game.gang != null}">
-        <form class="form-inline" method="post" action="#" th:action="@{{gameId}/new-gang(gameId=${game.id})}">
-            <div class="form-group">
-                <label class="sr-only" for="yakTribeGangUrl">YakTribe Gang URL</label>
-                <input type="text" class="form-control" id="yakTribeGangUrl" placeholder="https://yaktribe.games/underhive/json/gang/293915.json" name="yakTribeGangUrl"/>
+            <!-- ELSE -->
+            <div th:unless="${game.gang1 != null}">
+                <form class="form-inline" method="post" action="#" th:action="@{{gameId}/add-gang1(gameId=${game.id})}">
+                    <div class="form-group">
+                        <label class="sr-only" for="yakTribeGangUrl1">YakTribe Gang URL</label>
+                        <input type="text" class="form-control" id="yakTribeGangUrl1" placeholder="https://yaktribe.games/underhive/json/gang/293915.json" name="yakTribeGangUrl1"/>
+                    </div>
+                    <button class="btn btn-primary mb-2" type="submit">Add your YaktribeGang</button>
+                </form>
             </div>
-            <button class="btn btn-primary mb-2" type="submit">Add your YaktribeGang</button>
-        </form>
+        </div>
+        <div class="col-sm">
+            <!-- IF A Gang2 has already been assigned -->
+            <div th:if="${game.gang2 != null}">
+                <div class="gang-card">
+                    <h3 th:text="${game.gang.name}"></h3>
+                    <div class="ganger-cards" th:each="ganger: ${game.gang.ganger}">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" th:text="${ganger.name}">Ganger Name</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>M</th>
+                                                <th>WS</th>
+                                                <th>BS</th>
+                                                <th>S</th>
+                                                <th>T</th>
+                                                <th>W</th>
+                                                <th>I</th>
+                                                <th>A</th>
+                                                <th>LD</th>
+                                                <th>Cl</th>
+                                                <th>Wil</th>
+                                                <th>Int</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td th:text="${ganger.movement}">M</td>
+                                                <td th:text="${ganger.weaponSkill}">WS</td>
+                                                <td th:text="${ganger.ballisticSkill}">BS</td>
+                                                <td th:text="${ganger.strength}">S</td>
+                                                <td th:text="${ganger.toughness}">T</td>
+                                                <td th:text="${ganger.wounds}">W</td>
+                                                <td th:text="${ganger.initiative}">I</td>
+                                                <td th:text="${ganger.attacks}">A</td>
+                                                <td th:text="${ganger.leadership}">LD</td>
+                                                <td th:text="${ganger.coolness}">Cl</td>
+                                                <td th:text="${ganger.willpower}">Wil</td>
+                                                <td th:text="${ganger.intelligence}">Int</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ELSE -->
+            <div th:unless="${game.gang2 != null}">
+                <form class="form-inline" method="post" action="#" th:action="@{{gameId}/add-gang2(gameId=${game.id})}">
+                    <div class="form-group">
+                        <label class="sr-only" for="yakTribeGangUrl2">YakTribe Gang URL</label>
+                        <input type="text" class="form-control" id="yakTribeGangUrl2" placeholder="https://yaktribe.games/underhive/json/gang/293915.json" name="yakTribeGangUrl2"/>
+                    </div>
+                    <button class="btn btn-primary mb-2" type="submit">Add your YaktribeGang</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

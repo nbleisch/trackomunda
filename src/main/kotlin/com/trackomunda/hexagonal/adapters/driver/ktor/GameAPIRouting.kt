@@ -38,11 +38,19 @@ fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
             } ?: call.response.status(HttpStatusCode.NotFound)
         }
 
-        post("new-gang") {
+        post("add-gang1") {
             val parameters = call.receive<Parameters>()
-            gamesUseCases.addGangToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl"].orEmpty())?.let {
-                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/new-gang"))
+            gamesUseCases.addGang1ToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl1"].orEmpty())?.let {
+                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/add-gang1"))
             } ?: call.response.status(HttpStatusCode.NotFound)
         }
+
+        post("add-gang2") {
+            val parameters = call.receive<Parameters>()
+            gamesUseCases.addGang2ToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl2"].orEmpty())?.let {
+                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/add-gang2"))
+            } ?: call.response.status(HttpStatusCode.NotFound)
+        }
+
     }
 }

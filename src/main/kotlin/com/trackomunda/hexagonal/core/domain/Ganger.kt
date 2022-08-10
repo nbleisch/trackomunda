@@ -110,7 +110,7 @@ data class Ganger(
         this.also { if (!getActionsAvailable().contains(action)) throw FighterActionNotAvailableException(action = action, ganger = this) }
 
     private fun requireStatus(vararg status: FighterStatus): Ganger = this.also {
-        if (!status.contains(this.status)) throw RequiredFighterStatusDoesNotExistException(requiredFighterStatus = status.toList(), ganger = this)
+        if (!status.contains(this.status)) throw RequiredFighterStatusDoesNotMatchException(requiredFighterStatus = status.toList(), ganger = this)
     }
 
     private fun requireStatusNot(vararg status: FighterStatus): Ganger = this.also {

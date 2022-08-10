@@ -22,9 +22,16 @@ class GameService(val gameRepository: GameRepository, val gangImporter: GangImpo
         return gameRepository.findGame(id)
     }
 
-    fun addGangToGame(gameId: String, gangUrl: String): Game? {
+    fun addGang1ToGame(gameId: String, gangUrl: String): Game? {
         return gameRepository.findGame(gameId)?.let { game ->
-            game.addGang(gangImporter.importGang(gangUrl))
+            game.addOrReplaceGang1(gangImporter.importGang(gangUrl))
+            gameRepository.update(game)
+        }
+    }
+
+    fun addGang2ToGame(gameId: String, gangUrl: String): Game? {
+        return gameRepository.findGame(gameId)?.let { game ->
+            game.addOrReplaceGang2(gangImporter.importGang(gangUrl))
             gameRepository.update(game)
         }
     }
