@@ -16,41 +16,44 @@ import org.koin.ktor.ext.inject
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Routing.gameAPI(entryPoint: String) = route(entryPoint) {
 
-    val gamesUseCases: GameService by inject()
+    val gamesService: GameService by inject()
     val gangImporter: GangImporter by inject()
 
     //TODO: Would like to work with LocationClasses but couldnt get them working with Post
 
     get() {
-        val games = gamesUseCases.findAllGames()
+        val games = gamesService.findAllGames()
         call.respond(ThymeleafContent(template = "games", model = mapOf("games" to games)))
     }
 
     post() {
-        val newGame = gamesUseCases.createANewGame(call.receive<Parameters>()["gameName"].orEmpty())
+        val newGame = gamesService.createANewGame(call.receive<Parameters>()["gameName"].orEmpty())
         call.respondRedirect(URLBuilder.createFromCall(call).appendPathSegments(newGame.id).build().encodedPath)
     }
 
     route("{id}") {
         get {
-            gamesUseCases.findGame(call.parameters["id"]!!)?.let {
+            gamesService.findGame(call.parameters["id"]!!)?.let {
                 call.respond(ThymeleafContent(template = "game", model = mapOf("game" to it)))
             } ?: call.response.status(HttpStatusCode.NotFound)
         }
 
-        post("add-gang1") {
+        post("add-gang") {
             val parameters = call.receive<Parameters>()
-            gamesUseCases.addGang1ToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl1"].orEmpty())?.let {
-                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/add-gang1"))
+            val gameId = call.parameters["id"]
+            val yakTribeGangUrl = parameters["yakTribeGangUrl"]
+            val gangIndex = parameters["gangIndex"]?.toInt()
+            requireNotNull(gameId) { "gameId parameter is missing" }
+            requireNotNull(yakTribeGangUrl) { "yakTribeGangUrl parameter is missing" }
+            requireNotNull(gangIndex) { "gangIndex must be set" }
+            require(gangIndex in 1..2) { "gangIndex can only be 1 or 2" }
+            when (gangIndex) {
+                1 -> gamesService.addGang1ToGame(gameId, yakTribeGangUrl)
+                2 -> gamesService.addGang2ToGame(gameId, yakTribeGangUrl)
+                else -> null
+            }?.let {
+                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/add-gang"))
             } ?: call.response.status(HttpStatusCode.NotFound)
         }
-
-        post("add-gang2") {
-            val parameters = call.receive<Parameters>()
-            gamesUseCases.addGang2ToGame(call.parameters["id"]!!, parameters["yakTribeGangUrl2"].orEmpty())?.let {
-                call.respondRedirect(URLBuilder.createFromCall(call).encodedPath.removeSuffix("/add-gang2"))
-            } ?: call.response.status(HttpStatusCode.NotFound)
-        }
-
     }
 }
