@@ -31,7 +31,7 @@
                     <p class="mb-0 opacity-75" th:if="${game.gang2 != null}" th:text="${game.gang2.name}">Gang Name</p>
                     <p class="mb-0 opacity-75" th:unless="${game.gang2 != null}">Not set yet</p>
                 </div>
-                <small class="opacity-50 text-nowrap" th:text="'Round ' + ${game.status.name}">Status</small>
+                <small class="opacity-50 text-nowrap" th:text="${game.status.name}">Status</small>
             </div>
         </a>
     </div>
