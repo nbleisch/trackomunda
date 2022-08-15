@@ -6,7 +6,7 @@ import java.util.*
 data class GameGang(
     val id: String = UUID.randomUUID().toString(),
     val gang: Gang,
-    val ganger: List<GameGanger> = gang.ganger.map { GameGanger(ganger = it) },
+    val ganger: List<GameFighter> = gang.ganger.map { GameFighter(ganger = it) },
     var isBottleCheckWasRequired: Boolean = false
 ) {
     val startingCrewSize: Int

@@ -11,13 +11,13 @@ import kotlin.collections.toSet
 import kotlin.collections.toTypedArray
 import kotlin.properties.Delegates
 
-data class GangerId(
+data class FighterId(
     val id: String = UUID.randomUUID().toString()
 )
 
 
-data class GameGanger(
-    val id: GangerId = GangerId(),
+data class GameFighter(
+    val id: FighterId = FighterId(),
     val ganger: Ganger,
 ) : GangerAttributes by ganger {
     var isOutOfAction: Boolean by Delegates.notNull()
@@ -43,39 +43,39 @@ data class GameGanger(
     }.toSet()
 
 
-    fun hitWithBlaze(diceRoll: OneD6): GameGanger {
+    fun hitWithBlaze(diceRoll: OneD6): GameFighter {
         if (diceRoll >= 4) isBlazed = true
         return this
     }
 
-    fun hitWithCurse(diceRoll: TwoD6): GameGanger {
+    fun hitWithCurse(diceRoll: TwoD6): GameFighter {
         if (diceRoll < willpower) isInsane = true
         return this
     }
 
-    fun pin(): GameGanger = requireStatus(FighterStatus.STANDING).apply { status = FighterStatus.PRONE }
+    fun pin(): GameFighter = requireStatus(FighterStatus.STANDING).apply { status = FighterStatus.PRONE }
 
-    fun engage(): GameGanger = requireStatus(FighterStatus.STANDING, FighterStatus.ENGAGED).apply { status = FighterStatus.ENGAGED }
+    fun engage(): GameFighter = requireStatus(FighterStatus.STANDING, FighterStatus.ENGAGED).apply { status = FighterStatus.ENGAGED }
 
-    fun standUp(): GameGanger = requireStatus(FighterStatus.STANDING, FighterStatus.ENGAGED).apply { status = FighterStatus.STANDING }
+    fun standUp(): GameFighter = requireStatus(FighterStatus.STANDING, FighterStatus.ENGAGED).apply { status = FighterStatus.STANDING }
 
-    fun injure(): GameGanger = this.apply { status = FighterStatus.SERIOUSLY_INJURED }
+    fun injure(): GameFighter = this.apply { status = FighterStatus.SERIOUSLY_INJURED }
 
-    fun recover(): GameGanger = requireStatus(FighterStatus.SERIOUSLY_INJURED).apply {
+    fun recover(): GameFighter = requireStatus(FighterStatus.SERIOUSLY_INJURED).apply {
         status = FighterStatus.PRONE
         applyFleshWound()
     }
 
-    fun applyFleshWound(): GameGanger = requireStatusNot(FighterStatus.SERIOUSLY_INJURED).apply {
+    fun applyFleshWound(): GameFighter = requireStatusNot(FighterStatus.SERIOUSLY_INJURED).apply {
         currentToughness = Integer.max(0, currentToughness - 1)
         if (currentToughness == 0) goOutOfAction()
     }
 
-    fun goOutOfAction(): GameGanger = this.apply {
+    fun goOutOfAction(): GameFighter = this.apply {
         isOutOfAction = true
     }
 
-    fun applyDamage(damage: Int): GameGanger = this.apply {
+    fun applyDamage(damage: Int): GameFighter = this.apply {
         currentWounds = Integer.max(0, currentWounds - damage)
         if (currentWounds == 0) {
             injure()
@@ -93,7 +93,7 @@ data class GameGanger(
         actionStack.addLast(action)
     }
 
-    fun reset(): GameGanger {
+    fun reset(): GameFighter {
         isOutOfAction = false
         isReady = true
         isPartOfCrew = false
@@ -106,14 +106,14 @@ data class GameGanger(
         return this
     }
 
-    private fun requireActionAvailable(action: FighterAction): GameGanger =
+    private fun requireActionAvailable(action: FighterAction): GameFighter =
         this.also { if (!getActionsAvailable().contains(action)) throw FighterActionNotAvailableException(action = action, ganger = this) }
 
-    private fun requireStatus(vararg status: FighterStatus): GameGanger = this.also {
-        if (!status.contains(this.status)) throw RequiredFighterStatusDoesNotMatchException(requiredFighterStatus = status.toList(), ganger = this)
+    private fun requireStatus(vararg status: FighterStatus): GameFighter = this.also {
+        if (!status.contains(this.status)) throw RequiredFighterStatusDoesNotMatchException(requiredFighterStatus = status.toList(), fighter = this)
     }
 
-    private fun requireStatusNot(vararg status: FighterStatus): GameGanger = this.also {
+    private fun requireStatusNot(vararg status: FighterStatus): GameFighter = this.also {
         requireStatus(*FighterStatus.values().toList().filter { !status.contains(it) }.toTypedArray())
     }
 }

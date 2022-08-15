@@ -78,28 +78,30 @@ class Game(
         TODO("Not yet implemented")
     }
 
+
+    //Move into GameService
     fun randomSelect() {
         requireStatus(CREW_SELECTION)
         TODO("Not yet implemented")
     }
 
-    fun activateFighter(gangerId: GangerId) {
+    fun activateFighter(fighterId: FighterId) {
         requireStatus(GAME_STARTED)
         TODO("Not yet implemented")
     }
 
-    fun selectFighterForCrewSelection(gangerId: GangerId) {
+    fun selectFighterForCrewSelection(fighterId: FighterId) {
         requireStatus(CREW_SELECTION)
-        findFighter(gangerId)?.let {
+        findFighter(fighterId)?.let {
             it.isPartOfCrew = true
-        } ?: throw FighterDoesNotExistException(gangerId)
+        } ?: throw FighterDoesNotExistException(fighterId)
     }
 
-    fun deselectFighterForCrewSelection(gangerId: GangerId) {
+    fun deselectFighterForCrewSelection(fighterId: FighterId) {
         requireStatus(CREW_SELECTION)
-        findFighter(gangerId)?.let {
+        findFighter(fighterId)?.let {
             it.isPartOfCrew = false
-        } ?: throw FighterDoesNotExistException(gangerId)
+        } ?: throw FighterDoesNotExistException(fighterId)
     }
 
     fun copy() = Game(id = id, name = name, gang1 = gang1, gang2 = gang2, status = status, date = createdDate, round = round)
@@ -131,8 +133,8 @@ class Game(
         return result
     }
 
-    private fun findFighter(gangerId: GangerId): GameGanger? {
-        return listOf(gang1, gang2).firstNotNullOfOrNull { gang -> gang?.ganger?.find { ganger -> ganger.id == gangerId } }
+    private fun findFighter(fighterId: FighterId): GameFighter? {
+        return listOf(gang1, gang2).firstNotNullOfOrNull { gang -> gang?.ganger?.find { ganger -> ganger.id == fighterId } }
     }
 
     private fun requireStatus(requiredStatus: GameStatus): Game = this.also {

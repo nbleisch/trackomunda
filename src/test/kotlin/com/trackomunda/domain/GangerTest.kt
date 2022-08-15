@@ -2,7 +2,7 @@ package com.trackomunda.domain
 
 import com.trackomunda.hexagonal.core.domain.*
 import com.trackomunda.hexagonal.core.domain.game.FighterStatus.SERIOUSLY_INJURED
-import com.trackomunda.hexagonal.core.domain.game.GameGanger
+import com.trackomunda.hexagonal.core.domain.game.GameFighter
 import org.junit.Test
 import java.lang.Integer.MAX_VALUE
 import kotlin.test.assertEquals
@@ -13,11 +13,11 @@ import kotlin.test.assertTrue
 class GangerTest {
 
 
-    fun Ganger.toGameGanger() = GameGanger(ganger = this)
+    fun Ganger.toGameGanger() = GameFighter(ganger = this)
 
     @Test
     fun testApplyingDamage() {
-        val gangerWithMultipleWounds: GameGanger = createAGanger().copy(wounds = 4).toGameGanger()
+        val gangerWithMultipleWounds: GameFighter = createAGanger().copy(wounds = 4).toGameGanger()
 
         gangerWithMultipleWounds.applyDamage(1)
         assertEquals(gangerWithMultipleWounds.wounds - 1, gangerWithMultipleWounds.currentWounds)
@@ -34,7 +34,7 @@ class GangerTest {
 
     @Test
     fun testBlazeStatusEffects() {
-        val ganger: GameGanger = createAGanger().toGameGanger()
+        val ganger: GameFighter = createAGanger().toGameGanger()
         ganger.hitWithBlaze(OneD6(1))
         assertFalse(ganger.isBlazed, "Should not be blazed")
         ganger.hitWithBlaze(OneD6(4))
@@ -46,7 +46,7 @@ class GangerTest {
 
     @Test
     fun testInsaneStatusEffects() {
-        val ganger: GameGanger = createAGanger().toGameGanger()
+        val ganger: GameFighter = createAGanger().toGameGanger()
         ganger.hitWithCurse(TwoD6(12))
         assertFalse(ganger.isInsane, "Should not be insane")
         ganger.hitWithCurse(TwoD6(2))
@@ -57,7 +57,7 @@ class GangerTest {
 
     @Test
     fun testRecoverAndOutOfAction() {
-        val ganger: GameGanger = createAGanger().copy(toughness = 2).toGameGanger().injure()
+        val ganger: GameFighter = createAGanger().copy(toughness = 2).toGameGanger().injure()
         assertEquals(SERIOUSLY_INJURED, ganger.status, "Should be seriously injured")
         ganger.recover()
         assertNotEquals(SERIOUSLY_INJURED, ganger.status, "Should not be seriously injured anymore")
