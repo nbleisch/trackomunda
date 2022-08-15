@@ -1,7 +1,11 @@
 package com.trackomunda.hexagonal.core.domain
 
-class FighterActionNotAvailableException(val action: FighterAction, val ganger: Ganger) : RuntimeException()
-class RequiredFighterStatusDoesNotMatchException(val requiredFighterStatus: List<FighterStatus>, val ganger: Ganger) :
+import com.trackomunda.hexagonal.core.domain.game.*
+
+
+class FighterDoesNotExistException(val gangerId: GangerId) : RuntimeException("Ganger with ID $gangerId does not exist")
+class FighterActionNotAvailableException(val action: FighterAction, val ganger: GameGanger) : RuntimeException()
+class RequiredFighterStatusDoesNotMatchException(val requiredFighterStatus: List<FighterStatus>, val ganger: GameGanger) :
     RuntimeException("Ganger with status ${ganger.status} does not match one of the following required status: ${requiredFighterStatus.joinToString(",")}")
 
 class RequiredGameStatusDoesNotMatchException(val requiredGameStatus: GameStatus, val game: Game) :

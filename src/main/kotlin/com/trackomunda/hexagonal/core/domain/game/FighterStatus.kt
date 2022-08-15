@@ -1,4 +1,4 @@
-package com.trackomunda.hexagonal.core.domain
+package com.trackomunda.hexagonal.core.domain.game
 
 enum class FighterStatus {
     STANDING,

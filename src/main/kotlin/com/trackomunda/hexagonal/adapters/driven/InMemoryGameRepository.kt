@@ -1,6 +1,6 @@
 package com.trackomunda.hexagonal.adapters.driven
 
-import com.trackomunda.hexagonal.core.domain.Game
+import com.trackomunda.hexagonal.core.domain.game.Game
 import com.trackomunda.hexagonal.ports.GameRepository
 import java.util.*
 

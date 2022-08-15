@@ -1,8 +1,10 @@
 package com.trackomunda.hexagonal.core.domain
 
-import com.trackomunda.hexagonal.core.domain.FighterStatus.*
+import com.trackomunda.hexagonal.core.domain.game.FighterStatus
+import com.trackomunda.hexagonal.core.domain.game.FighterStatus.*
+import com.trackomunda.hexagonal.core.domain.game.GameGanger
 
-sealed class FighterAction(val name: String, val requiredStatus: Set<FighterStatus> = setOf(STANDING), val additionalCondition: (Ganger) -> Boolean = { !it.isOutOfAction && !it.isBlazed })
+sealed class FighterAction(val name: String, val requiredStatus: Set<FighterStatus> = setOf(STANDING), val additionalCondition: (GameGanger) -> Boolean = { !it.isOutOfAction && !it.isBlazed })
 
 object Shoot : FighterAction("Shoot")
 object Move : FighterAction("Move")

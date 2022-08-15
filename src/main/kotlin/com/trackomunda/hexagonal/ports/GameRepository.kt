@@ -1,6 +1,6 @@
 package com.trackomunda.hexagonal.ports
 
-import com.trackomunda.hexagonal.core.domain.Game
+import com.trackomunda.hexagonal.core.domain.game.Game
 
 interface GameRepository {
 

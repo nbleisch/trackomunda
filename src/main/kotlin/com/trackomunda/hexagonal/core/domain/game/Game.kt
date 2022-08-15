@@ -1,14 +1,16 @@
-package com.trackomunda.hexagonal.core.domain
+package com.trackomunda.hexagonal.core.domain.game
 
-import com.trackomunda.hexagonal.core.domain.GameStatus.*
+import com.trackomunda.hexagonal.core.domain.FighterDoesNotExistException
+import com.trackomunda.hexagonal.core.domain.RequiredGameStatusDoesNotMatchException
+import com.trackomunda.hexagonal.core.domain.game.GameStatus.*
 import java.time.LocalDate
 import java.util.*
 
 class Game(
     id: String = UUID.randomUUID().toString(),
     name: String,
-    gang1: Gang? = null,
-    gang2: Gang? = null,
+    gang1: GameGang? = null,
+    gang2: GameGang? = null,
     status: GameStatus = GANG_SELECTION,
     date: LocalDate = LocalDate.now(),
     round: Int = 1,
@@ -20,10 +22,10 @@ class Game(
     var name: String = name
         private set
 
-    var gang1: Gang? = gang1
+    var gang1: GameGang? = gang1
         private set
 
-    var gang2: Gang? = gang2
+    var gang2: GameGang? = gang2
         private set
 
     var createdDate: LocalDate = date
@@ -35,35 +37,43 @@ class Game(
     var status: GameStatus = status
         private set
 
-    fun addOrReplaceGang1(gang: Gang) {
+    init {
+        //reset()?
+    }
+
+    fun addOrReplaceGang1(gang: GameGang) {
         requireStatus(GANG_SELECTION)
         this.gang1 = gang
     }
 
-    fun addOrReplaceGang2(gang: Gang) {
+    fun addOrReplaceGang2(gang: GameGang) {
         requireStatus(GANG_SELECTION)
         this.gang2 = gang
     }
 
     fun reset() {
-        gang1?.reset()
-        gang2?.reset()
+        listOf(gang1, gang2).forEach {
+            it?.reset()
+        }
         status = GANG_SELECTION
         round = 1
     }
 
+
     fun nextRound() {
         requireStatus(GAME_STARTED)
-        gang1?.run {
-            check(noFighterIsReady())
-            makeAllFightersReady()
-        } ?: checkNotNull(gang1)
-        checkNotNull(gang1)
+        listOf(gang1, gang2).forEach { gang ->
+            gang?.run {
+                check(noFighterIsReady())
+                makeAllFightersReady()
+            }
+        }
         round += 1
     }
 
     fun startGame() {
         requireStatus(DEPLOYMENT)
+        require(GAME_STARTED.conditions.invoke(this))
         status = GAME_STARTED
         TODO("Not yet implemented")
     }
@@ -73,14 +83,23 @@ class Game(
         TODO("Not yet implemented")
     }
 
-    fun customSelect() {
-        requireStatus(CREW_SELECTION)
+    fun activateFighter(gangerId: GangerId) {
+        requireStatus(GAME_STARTED)
         TODO("Not yet implemented")
     }
 
-    fun activateFighter() {
-        requireStatus(GAME_STARTED)
-        TODO("Not yet implemented")
+    fun selectFighterForCrewSelection(gangerId: GangerId) {
+        requireStatus(CREW_SELECTION)
+        findFighter(gangerId)?.let {
+            it.isPartOfCrew = true
+        } ?: throw FighterDoesNotExistException(gangerId)
+    }
+
+    fun deselectFighterForCrewSelection(gangerId: GangerId) {
+        requireStatus(CREW_SELECTION)
+        findFighter(gangerId)?.let {
+            it.isPartOfCrew = false
+        } ?: throw FighterDoesNotExistException(gangerId)
     }
 
     fun copy() = Game(id = id, name = name, gang1 = gang1, gang2 = gang2, status = status, date = createdDate, round = round)
@@ -112,8 +131,12 @@ class Game(
         return result
     }
 
+    private fun findFighter(gangerId: GangerId): GameGanger? {
+        return listOf(gang1, gang2).firstNotNullOfOrNull { gang -> gang?.ganger?.find { ganger -> ganger.id == gangerId } }
+    }
+
     private fun requireStatus(requiredStatus: GameStatus): Game = this.also {
-        if (this.status != requiredStatus) throw RequiredGameStatusDoesNotMatchException(requiredGameStatus = requiredStatus, game = this)
+        if (this.status != requiredStatus || !this.status.conditions.invoke(it)) throw RequiredGameStatusDoesNotMatchException(requiredGameStatus = requiredStatus, game = this)
     }
 
 
