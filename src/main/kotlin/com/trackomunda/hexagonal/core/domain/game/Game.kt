@@ -1,5 +1,6 @@
 package com.trackomunda.hexagonal.core.domain.game
 
+import com.trackomunda.hexagonal.core.domain.FighterAction
 import com.trackomunda.hexagonal.core.domain.FighterDoesNotExistException
 import com.trackomunda.hexagonal.core.domain.RequiredGameStatusDoesNotMatchException
 import com.trackomunda.hexagonal.core.domain.game.GameStatus.*
@@ -59,6 +60,10 @@ class Game(
         round = 1
     }
 
+    fun executeFighterAction(fighterId: FighterId, fighterAction: FighterAction) : Game{
+
+        return this
+    }
 
     fun nextRound() {
         requireStatus(GAME_STARTED)

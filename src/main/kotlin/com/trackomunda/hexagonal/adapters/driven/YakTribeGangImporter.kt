@@ -8,27 +8,21 @@ import com.trackomunda.hexagonal.core.domain.Ganger
 import com.trackomunda.hexagonal.ports.GangImporter
 import io.ktor.client.*
 import io.ktor.client.plugins.*
-import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
 class YakTribeFetchException(message: String, origin: Throwable) : RuntimeException(message, origin)
 
-class YakTribeGangImporter : GangImporter {
+class YakTribeGangImporter(
+    private val httpClient: HttpClient
+) : GangImporter {
 
     private val objectMapper = jacksonObjectMapper()
 
     override fun importGang(gangUrl: String): Gang {
         return kotlin.runCatching {
-            HttpClient {
-                expectSuccess = true
-                followRedirects = true
-                install(Logging) {
-                    logger = Logger.DEFAULT
-                    level = LogLevel.HEADERS
-                }
-            }.use { client ->
+            httpClient.use { client ->
                 runBlocking {
                     objectMapper.readValue<YaktribeGangContainer>(client.get(gangUrl).bodyAsText()).toGang()
                 }

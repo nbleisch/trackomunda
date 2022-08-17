@@ -7,14 +7,34 @@ import com.marcinziolo.kotlin.wiremock.get
 import com.marcinziolo.kotlin.wiremock.returns
 import com.trackomunda.hexagonal.adapters.YakTribeFetchException
 import com.trackomunda.hexagonal.adapters.YakTribeGangImporter
+import com.trackomunda.hexagonal.adapters.adaptersModule
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.test.KoinTest
+import org.koin.test.inject
 import java.net.ServerSocket
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class YaktribeGangImporterTest {
+class YaktribeGangImporterTest : KoinTest {
     val port = findRandomPort()
     val url = "http://localhost:$port"
+    val yakTribeGangImporter: YakTribeGangImporter by inject()
+
+    @Before
+    fun setup() {
+        startKoin {
+            modules(adaptersModule)
+        }
+    }
+
+    @After
+    fun tearDown(){
+        stopKoin()
+    }
 
     @Rule
     @JvmField
@@ -29,7 +49,7 @@ class YaktribeGangImporterTest {
             statusCode = 200
             body = this::class.java.classLoader.getResource("yaktribe_test_gang.json")!!.readText()
         }
-        val gang = YakTribeGangImporter().importGang("$url/gang")
+        val gang = yakTribeGangImporter.importGang("$url/gang")
         assertEquals(gang.name, "Cawdor1000")
         assertEquals(gang.ganger.size, 10)
     }
@@ -40,7 +60,7 @@ class YaktribeGangImporterTest {
         } returns {
             statusCode = 400
         }
-        YakTribeGangImporter().importGang("$url/gang")
+        yakTribeGangImporter.importGang("$url/gang")
     }
 
     private fun findRandomPort(): Int {

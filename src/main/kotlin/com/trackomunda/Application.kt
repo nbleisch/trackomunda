@@ -12,5 +12,6 @@ fun main() {
         configureMonitoring()
         configureHTTP()
         configureRouting()
+        configureAuthentication()
     }.start(wait = true)
 }
