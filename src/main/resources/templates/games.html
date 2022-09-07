@@ -25,10 +25,10 @@
             <div class="d-flex gap-2 w-100 justify-content-between">
                 <div>
                     <h5 class="mb-0" th:text="${game.name}">another game</h5>
-                    <p class="mb-0 opacity-75" th:if="${game.gang1 != null}" th:text="${game.gang1.name}">Gang Name</p>
+                    <p class="mb-0 opacity-75" th:if="${game.gang1 != null}" th:text="${game.gang1.gang.name}">Gang Name</p>
                     <p class="mb-0 opacity-75" th:unless="${game.gang1 != null}">Not set yet</p>
 
-                    <p class="mb-0 opacity-75" th:if="${game.gang2 != null}" th:text="${game.gang2.name}">Gang Name</p>
+                    <p class="mb-0 opacity-75" th:if="${game.gang2 != null}" th:text="${game.gang2.gang.name}">Gang Name</p>
                     <p class="mb-0 opacity-75" th:unless="${game.gang2 != null}">Not set yet</p>
                 </div>
                 <small class="opacity-50 text-nowrap" th:text="${game.status.name}">Status</small>

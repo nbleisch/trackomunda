@@ -6,11 +6,11 @@
 <body>
 
 
-<div class="col-sm-6" th:fragment="gang(game, gang, gangIndex)">
+<div class="col-sm-6" th:fragment="gang(game, gamegang, gangIndex)">
     <!-- IF A Gang has already been assigned -->
-    <div th:if="${gang != null}">
-        <h3 class="text-center" th:text="${gang.name}"></h3>
-        <div th:each="ganger: ${gang.ganger}">
+    <div th:if="${gamegang != null}">
+        <h3 class="text-center" th:text="${gamegang.gang.name}"></h3>
+        <div th:each="ganger: ${gamegang.ganger}">
             <div class="row">
                 <div class="col-md-auto">
                     <div class="panel panel-default">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <!-- ELSE -->
-    <div th:unless="${gang != null}">
+    <div th:unless="${gamegang != null}">
         <form class="form-inline" method="post" action="#" th:action="@{{gameId}/add-gang(gameId=${game.id})}">
             <div class="form-group">
                 <label class="sr-only">YakTribe Gang URL</label>
